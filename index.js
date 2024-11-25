@@ -10,7 +10,7 @@ app.use(cors());
 
 app.get('/blog-posts', async (request, response) => {
   console.log("hit /blog-posts");
-  const result = await db.query('SELECT * FROM blog_post');
+  const result = await db.query('SELECT * FROM blog_post ORDER BY created_date desc');
   response.status(200).json(result.rows);
 });
 
