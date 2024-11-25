@@ -2,11 +2,11 @@ import pg from 'pg'
 const { Pool } = pg
 
 const pool = new Pool({
-    user: 'websitedb_owner',
-    password: '7hJ0socGeWVI',
-    host: 'ep-round-river-a6u30irr.us-west-2.aws.neon.tech',
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    host: process.env.HOST,
     port: 5432,
-    database: 'websitedb',
+    database: process.eventNames.DATABASE,
     ssl: true
 });
 
