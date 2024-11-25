@@ -6,7 +6,7 @@ const pool = new Pool({
     password: process.env.DB_PASSWORD,
     host: process.env.HOST,
     port: 5432,
-    database: process.eventNames.DATABASE,
+    database: process.env.DATABASE,
     ssl: true
 });
 
