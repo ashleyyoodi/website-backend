@@ -21,6 +21,14 @@ app.get('/blog-posts', async (request, response) => {
   response.status(200).json(result.rows);
 });
 
+app.post('/blog-posts/new', async (request, response) => {
+  console.log("hit /blog-posts/new");
+  let text = request.body.text;
+  console.log("saving: " + text);
+  const result = await db.query('INSERT INTO blog_post (text) VALUES ($1)', [text]);
+  response.status(200).json(result.rows);
+});
+
 /* Youtube Links */
 
 app.get('/youtube-links', async (request, response) => {
