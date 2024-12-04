@@ -29,6 +29,14 @@ app.post('/blog-posts/new', async (request, response) => {
   response.status(200).json(result.rows);
 });
 
+app.post('/blog-posts/delete', async (request, response) => {
+  console.log("hit /blog-posts/delete");
+  let id = request.query.id;
+  console.log("deleting blog post id=: " + id);
+  const result = await db.query('DELETE FROM blog_post WHERE blog_post_id=$1', [id]);
+  response.status(200).json(result.rows);
+});
+
 /* Youtube Links */
 
 app.get('/youtube-links', async (request, response) => {
