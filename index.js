@@ -29,10 +29,19 @@ app.post('/blog-posts/new', async (request, response) => {
   response.status(200).json(result.rows);
 });
 
+app.post('/blog-posts/edit', async (request, response) => {
+  console.log("hit /blog-posts/edit");
+  let id = request.query.id;
+  let text = request.body.text;
+  console.log("updating blog post id=" + id);
+  const result = await db.query('UPDATE blog_post SET text=$1, updated_date=NOW() AT TIME ZONE \'US/Pacific\' WHERE blog_post_id=$2', [text, id]);
+  response.status(200).json(result.rows);
+});
+
 app.post('/blog-posts/delete', async (request, response) => {
   console.log("hit /blog-posts/delete");
   let id = request.query.id;
-  console.log("deleting blog post id=: " + id);
+  console.log("deleting blog post id=" + id);
   const result = await db.query('UPDATE blog_post SET deleted=true WHERE blog_post_id=$1', [id]);
   response.status(200).json(result.rows);
 });
