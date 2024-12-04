@@ -17,7 +17,7 @@ app.listen(port, () => {
 
 app.get('/blog-posts', async (request, response) => {
   console.log("hit /blog-posts");
-  const result = await db.query('SELECT * FROM blog_post ORDER BY created_date desc');
+  const result = await db.query('SELECT * FROM blog_post WHERE deleted=false ORDER BY created_date desc');
   response.status(200).json(result.rows);
 });
 
@@ -33,7 +33,7 @@ app.post('/blog-posts/delete', async (request, response) => {
   console.log("hit /blog-posts/delete");
   let id = request.query.id;
   console.log("deleting blog post id=: " + id);
-  const result = await db.query('DELETE FROM blog_post WHERE blog_post_id=$1', [id]);
+  const result = await db.query('UPDATE blog_post SET deleted=true WHERE blog_post_id=$1', [id]);
   response.status(200).json(result.rows);
 });
 
